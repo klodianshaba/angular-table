@@ -1,0 +1,185 @@
+<ng-template #cdkTableTemplate let-table="table">
+  <div class="table" [attr.id]="table.tableId" (click)="table.hideSpeedDialActions()">
+    <cdk-table
+      #cdkTable
+      class="table-body"
+      multiTemplateDataRows=""
+      [dataSource]="table.getDataSource()"
+      matSort
+      [matSortDisabled]="!table.sorting.allow"
+      (matSortChange)="table.sortData($event)"
+      cdkDropList
+      (cdkDropListDropped)="table.drop($event)"
+      [cdkDropListDisabled]="!table.getOrdering()?.allow">
+      <ng-container [cdkColumnDef]="column.field" *ngFor="let column of table.getColumns()">
+        <cdk-header-cell *cdkHeaderCellDef mat-sort-header [disabled]="!column?.sortable">
+          <span *ngIf="column?.selection && table.selection.allow" (click)="$event.stopPropagation()">
+            <mat-checkbox
+              *ngIf="table.getSelection().multiple"
+              color="primary"
+              (click)="$event.stopPropagation(); table.hideSpeedDialActions()"
+              (change)="table.selectAllToggle()"
+              [checked]="table.selectionModel.hasValue() && table.areAllSelected()"
+              [indeterminate]="table.selectionModel.hasValue() && !table.areAllSelected()"
+              [aria-label]="table.checkboxLabel()">
+            </mat-checkbox>
+          </span>
+          <span>{{ column.label }}</span>
+        </cdk-header-cell>
+        <cdk-cell class="table-cell" *cdkCellDef="let element; let index = dataIndex">
+          <div>
+            <span *ngIf="column?.selection && table.selection.allow" (click)="$event.stopPropagation()">
+              <mat-checkbox
+                color="primary"
+                (change)="table.selectRow(element)"
+                (click)="$event.stopPropagation(); table.hideSpeedDialActions()"
+                [checked]="table.selectionModel.isSelected(element)"
+                [aria-label]="table.checkboxLabel(element, element[column.field])">
+              </mat-checkbox>
+            </span>
+
+            <span class="table-expandable-row-icon" *ngIf="column?.expandable">
+              <mat-icon>
+                <span *ngIf="table.expandableSelectionModel.isSelected(element)">expand_more</span>
+                <span *ngIf="!table.expandableSelectionModel.isSelected(element)">chevron_right</span>
+              </mat-icon>
+            </span>
+            <ng-container *ngIf="!column?.template; else isTemplate">
+              <span *ngIf="column?.text; else notDataText">
+                {{ column.text(element) | async }}
+              </span>
+              <ng-template #notDataText>
+                <span *ngIf="column?.field"> {{ element[column.field] }} </span>
+              </ng-template>
+            </ng-container>
+            <ng-template #isTemplate>
+              <ng-container
+                [ngTemplateOutlet]="getTemplate(table.templates.columnsTemplate)"
+                [ngTemplateOutletContext]="{
+                  $implicit: column,
+                  source: element,
+                  index: index
+                }"></ng-container>
+            </ng-template>
+          </div>
+        </cdk-cell>
+      </ng-container>
+
+      <ng-container [cdkColumnDef]="table.actionsDataField">
+        <cdk-header-cell
+          *cdkHeaderCellDef
+          [ngClass]="{
+            'table-action-column': table.getActionItems().length > 0
+          }"></cdk-header-cell>
+        <cdk-cell
+          *cdkCellDef="let element; let index = dataIndex"
+          [ngClass]="{
+            'table-action-column': table.getActionItems().length > 0
+          }">
+          <span>
+            <button
+              class="table-action-button"
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              (click)="$event.stopPropagation()">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button
+                class="menu-action-button"
+                mat-menu-item
+                *ngFor="let action of table.getActionItems()"
+                (mouseover)="action?.hover ? action.hover(element, index) : null"
+                (click)="action?.click ? action.click(element, table.parentElement, index) : null">
+                <mat-icon>{{ action.icon }}</mat-icon>
+                <span>{{ action.label }}</span>
+              </button>
+            </mat-menu>
+          </span>
+        </cdk-cell>
+      </ng-container>
+
+      <ng-container
+        [cdkColumnDef]="table.expandedDetailDataField"
+        *ngIf="table.expandable.allow && table.isExpandableTemplate()">
+        <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
+        <cdk-cell *cdkCellDef="let element; let index = dataIndex" [attr.colspan]="table.getColumns().length">
+          <div
+            class="table-expandable-row-content"
+            *ngIf="table.expandableRenderingSelectionModel.isSelected(element)"
+            [@tableExpandAnimation]="table.expandableSelectionModel.isSelected(element) ? 'expanded' : 'collapsed'">
+            <div class="table-expandable-row-content-expanded">
+              <ng-container
+                [ngTemplateOutlet]="getTemplate(table.templates.expandableTemplate)"
+                [ngTemplateOutletContext]="{
+                  row: element,
+                  index: index
+                }"></ng-container>
+            </div>
+          </div>
+        </cdk-cell>
+      </ng-container>
+
+      <ng-container
+        [cdkColumnDef]="table.expandedTableDataField"
+        *ngIf="table.table && table.expandable.allow && table.isExpandableTable()">
+        <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
+        <cdk-cell *cdkCellDef="let element; let index = dataIndex" [attr.colspan]="table.getColumns().length">
+          <div
+            class="table-expandable-row-content"
+            *ngIf="table.expandableRenderingSelectionModel.isSelected(element)"
+            [@tableExpandAnimation]="table.expandableSelectionModel.isSelected(element) ? 'expanded' : 'collapsed'">
+            <div class="table-expandable-row-content-expanded">
+              <ng-container
+                [ngTemplateOutlet]="cdkTableTemplate"
+                [ngTemplateOutletContext]="{
+                  table: table.getNestedTable(element)
+                }"></ng-container>
+            </div>
+          </div>
+        </cdk-cell>
+      </ng-container>
+
+      <cdk-header-row class="table-header-row" *cdkHeaderRowDef="table.getDisplayedColumns()"></cdk-header-row>
+      <cdk-row
+        class="table-row"
+        *cdkRowDef="let row; columns: table.getDisplayedColumns()"
+        [attr.id]="table.tableId"
+        [class.disabled-ordering]="!table.getOrdering()?.allow"
+        matRipple
+        [matRippleDisabled]="!table.getRipple().allow"
+        [ngClass]="table.selectionModel.isSelected(row) ? 'cdk-row-selected ' + table.selection.cssClass : ''"
+        cdkDrag
+        [cdkDragBoundary]="table.getOrdering()?.boundary ? '.table' : ''"
+        [cdkDragPreviewClass]="table.getOrdering().dragPreviewCssClass"
+        (cdkDragStarted)="table.onStartedDraggingRow()"
+        (cdkDragEnded)="table.onEndedDraggingRow()"
+        (click)="table.expandRow(row)">
+      </cdk-row>
+      <div *ngIf="table.expandable.allow && table.isExpandableTemplate()">
+        <cdk-row *cdkRowDef="let row; columns: [table.expandedDetailDataField]" class="table-expandable-row"></cdk-row>
+      </div>
+      <div *ngIf="table.table && table.expandable.allow && table.isExpandableTable()">
+        <cdk-row *cdkRowDef="let row; columns: [table.expandedTableDataField]" class="table-expandable-row"></cdk-row>
+      </div>
+    </cdk-table>
+
+    <div class="table-row" *ngIf="table.getDataSource().length == 0">Nothing here</div>
+    <mat-paginator
+      #matPaginator
+      *ngIf="table.pagination.allow"
+      [pageSize]="table.pagination.size"
+      [pageIndex]="table.pagination.currentPage"
+      [pageSizeOptions]="table.pagination.options"
+      [length]="table.pagination.totalCount"
+      aria-label="Select page of users"
+      (page)="table.pageData($event)"
+      [showFirstLastButtons]="table.pagination.showFirstLastButtons"
+      [hidePageSize]="table.pagination.hidePageSize">
+    </mat-paginator>
+  </div>
+</ng-template>
+
+<div>
+  <ng-container [ngTemplateOutlet]="cdkTableTemplate" [ngTemplateOutletContext]="{ table }"> </ng-container>
+</div>

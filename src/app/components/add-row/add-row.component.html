@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Add Row</h2>
+<mat-dialog-content>
+  <div class="fields">
+    @for (column of data.columns; track column) {
+      @switch (column.fieldType.field) {
+        @case (TableColumnFieldTypes.input) {
+          <mat-form-field #matFormField>
+            <mat-label>{{ column.label }}</mat-label>
+            <input matInput [(ngModel)]="data.author[column.field]" [required]="true" [type]="column.fieldType.type" />
+          </mat-form-field>
+        }
+        @case (TableColumnFieldTypes.toggle) {
+          <mat-slide-toggle color="primary" [(ngModel)]="data.author[column.field]">
+            {{ column.label }}
+          </mat-slide-toggle>
+        }
+      }
+    }
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-stroked-button (click)="dialogRef.close()">Close</button>
+  <button mat-raised-button color="primary" (click)="addRow()">Add</button>
+</mat-dialog-actions>

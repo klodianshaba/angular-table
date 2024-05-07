@@ -1,0 +1,17 @@
+mat-dialog-content {
+  max-width: 500px;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: end;
+}
+.fields {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  mat-form-field {
+    flex-grow: 1;
+  }
+}

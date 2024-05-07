@@ -1,0 +1,182 @@
+// way of overwrites variables
+// tableId && order dragPreviewCssClass
+//#table, body .table-drag-preview {
+//  --table-background-color: blue;
+//  --table-row-background-color: gray;
+//  --table-row-hover-background-color: red;
+//}
+:host,
+.cdk-drag-preview {
+  --table-background-color: #ffffff;
+  --table-row-background-color: #ffffff;
+  --table-header-row-background-color: #ffffff;
+  --table-footer-row-background-color: #ffffff;
+  --table-row-hover-background-color: #f8f6f6;
+  --table-row-selected-background-color: #ebebfc;
+  --table-row-drag-placeholder-background-color: gray;
+  --table-box-shadow: 0 0 3px 1px rgba(25, 23, 28, 0.05);
+  --table-border-color: #eeeaea;
+  --table-text-color: black;
+  --table-font-family: Roboto, 'Helvetica Neue', sans-serif;
+  --table-min-width: 300px;
+}
+
+::ng-deep {
+  cdk-table {
+    width: 100%;
+  }
+  .table {
+    background-color: var(--table-background-color);
+    box-shadow: var(--table-box-shadow);
+    color: var(--table-text-color);
+    font-family: var(--table-font-family);
+    font-size: 14px;
+    min-width: var(--table-min-width);
+    .mat-paginator-container {
+      padding: 0 0 0 10px;
+      .mat-paginator-range-label,
+      .mat-paginator-page-size,
+      .mat-select-value,
+      .mat-select-arrow {
+        color: var(--table-text-color) !important;
+      }
+      .mat-form-field-underline {
+        background-color: var(--table-text-color) !important;
+      }
+      .mat-paginator-range-actions {
+        button {
+          color: var(--table-text-color) !important;
+        }
+      }
+    }
+    .mat-sort-header-arrow {
+      color: var(--table-text-color) !important;
+    }
+    .mat-checkbox-frame {
+      border-color: var(--table-text-color) !important;
+    }
+    .table-cell {
+    }
+    .table-action-button {
+      width: 40px;
+      height: 40px;
+      .mat-icon {
+        position: relative;
+        top: -3px;
+        left: -3px;
+      }
+    }
+  }
+  .table-row {
+    cursor: pointer;
+    border-top: 1px solid var(--table-border-color);
+  }
+  .table-row,
+  .table-header-row {
+    padding-left: 10px;
+    min-height: 40px;
+  }
+  .table-header-row {
+    font-weight: bold;
+    border-bottom: 1px solid var(--table-border-color);
+  }
+
+  cdk-row,
+  cdk-header-row,
+  cdk-footer-row,
+  cdk-row.cdk-drag-preview {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--table-row-background-color);
+    color: var(--table-text-color);
+
+    cdk-cell,
+    cdk-header-cell,
+    cdk-footer-cell {
+      flex: 1;
+    }
+    .table-action-column {
+      max-width: 40px;
+    }
+  }
+  cdk-row {
+    overflow: inherit;
+  }
+  cdk-header-row {
+    background-color: var(--table-header-row-background-color);
+  }
+  cdk-footer-row,
+  .mat-paginator-outer-container {
+    background-color: var(--table-footer-row-background-color);
+  }
+
+  button.menu-action-button {
+    height: 35px;
+    line-height: 35px;
+  }
+
+  cdk-row.cdk-row-selected,
+  cdk-row.cdk-drag-preview.cdk-row-selected {
+    background-color: var(--table-row-selected-background-color);
+  }
+  cdk-row:hover {
+    background-color: var(--table-row-hover-background-color);
+  }
+
+  .table [mat-sort-header].cdk-program-focused .mat-sort-header-container {
+    border-bottom: 0;
+  }
+
+  //drag & drop style
+
+  cdk-row.cdk-drag-preview {
+    box-shadow: var(--table-box-shadow);
+    border-top: none;
+    .mat-ripple-element {
+      background-color: transparent;
+    }
+  }
+
+  .cdk-drag-preview.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .table-body.cdk-drop-list-dragging,
+  .table-body-level2.cdk-drop-list-dragging,
+  .table-body-level3.cdk-drop-list-dragging {
+    pointer-events: none !important;
+    .table-row:not(.cdk-drag-placeholder) {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  .disabled-ordering {
+    cursor: auto;
+  }
+
+  .table-row.cdk-drag-placeholder {
+    background-color: var(--table-row-drag-placeholder-background-color);
+    opacity: 0;
+  }
+}
+
+// extendable
+cdk-row.table-expandable-row {
+  border-top: none;
+}
+
+.table-expandable-row-content {
+  overflow: hidden;
+}
+.table-expandable-row-content-expanded {
+  padding: 20px;
+}
+
+.table-expandable-row-icon {
+  position: relative;
+  top: 7px;
+  .mat-icon {
+    margin-right: 5px;
+  }
+}
