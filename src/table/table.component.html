@@ -38,7 +38,7 @@
               </mat-checkbox>
             </span>
 
-            <mat-icon class="table-expandable-row-icon" *ngIf="column?.expandable">
+            <mat-icon class="table-expandable-row-icon" *ngIf="column?.expandable" (click)="table.expandRow(element)">
               <span *ngIf="table.expandableSelectionModel.isSelected(element)">expand_more</span>
               <span *ngIf="!table.expandableSelectionModel.isSelected(element)">chevron_right</span>
             </mat-icon>
@@ -152,8 +152,7 @@
         [cdkDragBoundary]="table.getOrdering()?.boundary ? '.table' : ''"
         [cdkDragPreviewClass]="table.getOrdering().dragPreviewCssClass"
         (cdkDragStarted)="table.onStartedDraggingRow()"
-        (cdkDragEnded)="table.onEndedDraggingRow()"
-        (click)="table.expandRow(row)">
+        (cdkDragEnded)="table.onEndedDraggingRow()">
       </cdk-row>
       <div *ngIf="table.expandable.allow && table.isExpandableTemplate()">
         <cdk-row *cdkRowDef="let row; columns: [table.expandedDetailDataField]" class="table-expandable-row"></cdk-row>
