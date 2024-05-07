@@ -81,6 +81,16 @@
     border-bottom: 1px solid var(--table-border-color);
   }
 
+  cdk-row.table-row {
+    cdk-cell {
+      > div {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+    }
+  }
+
   cdk-row,
   cdk-header-row,
   cdk-footer-row,
@@ -174,9 +184,5 @@ cdk-row.table-expandable-row {
 }
 
 .table-expandable-row-icon {
-  position: relative;
-  top: 7px;
-  .mat-icon {
-    margin-right: 5px;
-  }
+  margin-right: 7px;
 }

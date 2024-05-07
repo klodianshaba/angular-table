@@ -8,6 +8,7 @@ import { TableTemplateDirective } from '../table/table-template.directive';
 import { CustomizeComponent } from './components/customize/customize.component';
 import { DataSource, AuthorModel } from './models/author-model';
 import { MatIcon } from '@angular/material/icon';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ import { MatIcon } from '@angular/material/icon';
     TableTemplateDirective,
     CustomizeComponent,
     MatIcon,
+    NgOptimizedImage,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

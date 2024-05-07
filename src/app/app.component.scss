@@ -1,6 +1,7 @@
+@import '../variables';
 header,
 main {
-  padding: 20px;
+  padding: $page-padding;
 }
 
 header {
@@ -11,9 +12,9 @@ header {
   top: 0;
   z-index: 2 !important;
   background: white;
-  box-shadow: 0 0 3px 1px rgba(25, 23, 28, 0.05);
+  box-shadow: $box-shadow;
   strong {
-    font-size: 18px;
+    font-size: $large-text;
   }
   > div {
     display: flex;
@@ -30,14 +31,11 @@ header {
       transition: 0.2s;
     }
   }
-  a {
-    margin-left: 1rem;
-  }
 }
 
 main {
   display: flex;
-  gap: 20px;
+  gap: $page-padding;
   app-customize {
     max-width: 400px;
   }

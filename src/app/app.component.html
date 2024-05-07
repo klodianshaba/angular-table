@@ -1,12 +1,15 @@
 <header>
-  <strong>Angular Table</strong>
+  <div>
+    <img class="padding-right" ngSrc="favicon.ico" width="25" height="25" alt="Angular logo" />
+    <strong>Angular Table</strong>
+  </div>
   <div>
     &copy; Klodian Shaba
-    <a href="https://github.com/klodianshaba/angular-table" target="_blank">
-      <img alt="GitHub Logo" src="./assets/images/GitHub-Mark-32px.png" />
+    <a class="padding-left" href="https://github.com/klodianshaba/angular-table" target="_blank">
+      <img alt="GitHub Logo" ngSrc="./assets/images/GitHub-Mark-32px.png" height="25" width="25" />
     </a>
-    <a href="https://www.linkedin.com/in/klodian-shaba-536269153/" target="_blank">
-      <img alt="GitHub Logo" src="./assets/images/In-Blue-Logo.png.original.png" />
+    <a class="padding-left" href="https://www.linkedin.com/in/klodian-shaba-536269153/" target="_blank">
+      <img alt="GitHub Logo" ngSrc="./assets/images/In-Blue-Logo.png.original.png" height="25" width="25" />
     </a>
   </div>
 </header>
@@ -21,7 +24,8 @@
           <a href="javascript:">{{ source[column.field] }}</a>
         }
         @case ('nationality') {
-          {{ source[column.field] }}
+          <img class="padding-right" ngSrc="favicon.ico" width="25" height="25" alt="Angular logo" />
+          <span> {{ source[column.field] }}</span>
         }
         @case ('awardWinner') {
           @if (source[column.field]) {

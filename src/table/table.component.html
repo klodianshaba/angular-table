@@ -38,12 +38,11 @@
               </mat-checkbox>
             </span>
 
-            <span class="table-expandable-row-icon" *ngIf="column?.expandable">
-              <mat-icon>
-                <span *ngIf="table.expandableSelectionModel.isSelected(element)">expand_more</span>
-                <span *ngIf="!table.expandableSelectionModel.isSelected(element)">chevron_right</span>
-              </mat-icon>
-            </span>
+            <mat-icon class="table-expandable-row-icon" *ngIf="column?.expandable">
+              <span *ngIf="table.expandableSelectionModel.isSelected(element)">expand_more</span>
+              <span *ngIf="!table.expandableSelectionModel.isSelected(element)">chevron_right</span>
+            </mat-icon>
+
             <ng-container *ngIf="!column?.template; else isTemplate">
               <span *ngIf="column?.text; else notDataText">
                 {{ column.text(element) | async }}

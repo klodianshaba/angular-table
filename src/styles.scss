@@ -1,19 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import './variables';
 html,
 body {
   height: 100%;
   scrollbar-width: thin;
   margin: 0;
   scrollbar-color: gray transparent;
-  .cdk-drag-preview {
-    --table-row-hover-background-color: red;
-    --table-row-selected-background-color: blue;
-  }
 }
 body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 .mat-mdc-form-field-subscript-wrapper {
   display: none !important;
+}
+
+.padding-0 {
+  padding: 0 !important;
+}
+.padding-bottom-0 {
+  padding-bottom: 0 !important;
+}
+.padding-top-0 {
+  padding-top: 0 !important;
+}
+.padding {
+  padding: $padding !important;
+}
+.padding-bottom {
+  padding-bottom: $padding !important;
+}
+.padding-top {
+  padding-top: $padding !important;
+}
+.padding-left {
+  padding-left: $padding !important;
+}
+.padding-right {
+  padding-right: $padding !important;
+}
+.margin-right {
+  margin-right: $padding !important;
 }
