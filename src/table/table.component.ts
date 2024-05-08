@@ -258,9 +258,6 @@ export class Table<T> implements Required<TableConfig<T>> {
   expandableRenderingSelectionModel = new SelectionModel<any>(true, []);
   expandableSelectionModel = new SelectionModel<any>(true, []);
   expandableRenderingTimeout: any;
-  public readonly actionsDataField: string = 'actions';
-  public readonly expandedDetailDataField: string = 'expandedDetail';
-  public readonly expandedTableDataField: string = 'expandedTable';
   parentElement: any;
 
   constructor(
@@ -318,11 +315,11 @@ export class Table<T> implements Required<TableConfig<T>> {
   getDataSource(): any[] {
     switch (true) {
       case this.isOperationHttp():
-        return [...this.dataSource];
+        return this.dataSource;
       case this.isOperationDatasource():
-        return [...this.getCurrentDataSource()];
+        return this.getCurrentDataSource();
       default:
-        return [...this.dataSource];
+        return this.dataSource;
     }
   }
 
@@ -359,58 +356,8 @@ export class Table<T> implements Required<TableConfig<T>> {
     else return displayingDatasource;
   }
 
-  getPagination(): TablePaginationMetaData {
-    return this.pagination;
-  }
-
-  getRipple(): TableRippleRowMetaData {
-    return this.ripple;
-  }
-
-  getColumns(): TableColumnMetaData[] {
-    return this.columns;
-  }
-
-  getActions(): TableActionMetaData {
-    return this.actions;
-  }
-
-  getActionItems(element: any, index: number): TableActionItemMetaData[] {
-    return this.actions.items.filter(item => {
-      if (item?.display) {
-        if (item.display(element, index)) return item;
-        else return false;
-      } else {
-        return item;
-      }
-    });
-  }
-
-  getSelection(): TableSelectionMetaData {
-    return this.selection;
-  }
-
-  getOrdering(): TableOrderingMetaData {
-    return this.ordering;
-  }
-
   getDisplayedColumns(): string[] {
     return this.columns.filter(column => column.display).map(column => column.field);
-  }
-
-  isTableActionsDirectionSpeedDial(): boolean {
-    return this.actions.type === TableActionTypes.speedDial;
-  }
-
-  toggleSpeedDialActions(element: any): void {
-    const isOpened = this.actionsSelectionModel.isSelected(element);
-    if (!this.actions.multiple) this.actionsSelectionModel.clear();
-    isOpened ? this.actionsSelectionModel.deselect(element) : this.actionsSelectionModel.select(element);
-  }
-
-  hideSpeedDialActions(): void {
-    this.actionsSelectionModel.clear();
-    this.detectChanges.next(true);
   }
 
   onStartedDraggingRow(): void {
@@ -613,8 +560,14 @@ export class Table<T> implements Required<TableConfig<T>> {
       ]),
     ]),
     trigger('tableAnimation', [
-      transition(':enter', [style({ opacity: '0' }), animate(500, style({ opacity: '1' }))]),
-      transition(':leave', [style({ opacity: '1' }), animate(500, style({ opacity: '0' }))]),
+      transition(':enter', [
+        style({ opacity: '0', transform: 'translateX(50px)' }),
+        animate(200, style({ opacity: '1', transform: 'translateX(0px)' })),
+      ]),
+      transition(':leave', [
+        style({ opacity: '1', transform: 'translateX(0px)' }),
+        animate(200, style({ opacity: '0', transform: 'translateX(50px)' })),
+      ]),
     ]),
   ],
   imports: [
