@@ -50,6 +50,7 @@ export class CustomizeComponent {
   }
   actionChange(event: MatCheckboxChange, action: TableActionItemMetaData) {
     action.display = () => event.checked;
+    this.table().refresh();
   }
   addRow(): void {
     const row = { ...this.table().dataSource[0] };
