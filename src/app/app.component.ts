@@ -2,13 +2,20 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import { Table, TableColumnFieldTypes, TableComponent, TableExtendableTypes } from '../table/table.component';
+import {
+  Table,
+  TableColumnFieldTypes,
+  TableComponent,
+  TableExtendableTypes,
+  TableOperationTypes,
+} from '../table/table.component';
 import { MatButton } from '@angular/material/button';
 import { TableTemplateDirective } from '../table/table-template.directive';
 import { CustomizeComponent } from './components/customize/customize.component';
 import { DataSource, AuthorModel } from './models/author-model';
 import { MatIcon } from '@angular/material/icon';
 import { NgOptimizedImage } from '@angular/common';
+import { MatRipple } from '@angular/material/core';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +30,7 @@ import { NgOptimizedImage } from '@angular/common';
     CustomizeComponent,
     MatIcon,
     NgOptimizedImage,
+    MatRipple,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -38,6 +46,7 @@ export class AppComponent {
         display: true,
         label: 'Title',
         field: 'title',
+        sortable: true,
       },
       {
         display: true,
@@ -59,11 +68,11 @@ export class AppComponent {
   public table = new Table<AuthorModel>({
     dataSource: [],
     templates: { columnsTemplate: 'authorsTableTemplate', expandableTemplate: 'booksCustomTemplate' },
-    operation: { type: 'datasource', endpoint: '/search' },
+    operation: { type: TableOperationTypes.datasource, endpoint: '/search' },
     selection: { allow: true, subscribe: () => {} },
     pagination: {
       totalCount: DataSource.length,
-      size: 15,
+      size: 12,
     },
     expandable: { allow: true, type: TableExtendableTypes.template },
     ordering: { boundary: false },
@@ -107,10 +116,7 @@ export class AppComponent {
           label: 'Edit',
           icon: 'edit',
           color: 'warn',
-          click: (row: AuthorModel, parentRow, index) => {
-            this.table.dataSource.splice(index, 1);
-            this.table.pagination.totalCount = this.table.dataSource.length;
-          },
+          click: (row: AuthorModel, parentRow, index) => {},
           display: () => true,
         },
         {
@@ -134,5 +140,6 @@ export class AppComponent {
 
   loadData() {
     this.table.dataSource = DataSource;
+    this.table.expandRow(this.table.dataSource[0]);
   }
 }

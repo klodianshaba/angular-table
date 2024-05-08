@@ -26,7 +26,7 @@
   Allow pagination
 </mat-slide-toggle>
 <div class="padding-top">
-  <mat-form-field appearance="fill">
+  <mat-form-field>
     <mat-label>Item per page</mat-label>
     <input matInput type="number" [(ngModel)]="table().pagination.size" (ngModelChange)="table().refresh()" />
   </mat-form-field>
@@ -49,8 +49,15 @@
   (ngModelChange)="allowExpanationChange()">
   Allow expanation
 </mat-slide-toggle>
-<mat-slide-toggle color="primary" [(ngModel)]="table().expandable.multiple" (ngModelChange)="table().refresh()">
+<mat-slide-toggle
+  class="padding-right"
+  color="primary"
+  [(ngModel)]="table().expandable.multiple"
+  (ngModelChange)="table().refresh()">
   Expand multiple rows
+</mat-slide-toggle>
+<mat-slide-toggle color="primary" [checked]="table().areAllExpanded()" (click)="expandAllToggleChange()">
+  Expand all
 </mat-slide-toggle>
 
 <div class="customize-section padding-bottom-0">

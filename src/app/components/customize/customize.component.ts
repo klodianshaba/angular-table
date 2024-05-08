@@ -52,6 +52,10 @@ export class CustomizeComponent {
     action.display = () => event.checked;
     this.table().refresh();
   }
+  expandAllToggleChange() {
+    if (this.table().areAllExpanded()) this.table().collapseAll();
+    else this.table().expandAll();
+  }
   addRow(): void {
     const row = { ...this.table().dataSource[0] };
     for (let key in row) {
