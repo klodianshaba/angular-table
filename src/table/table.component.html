@@ -1,6 +1,7 @@
 <ng-template #cdkTableTemplate let-table="table">
-  <div class="table" [attr.id]="table.tableId" (click)="table.hideSpeedDialActions()">
-    <cdk-table
+  <div class="table" [attr.id]="table.tableId">
+    <table
+      cdk-table
       #cdkTable
       class="table-body"
       multiTemplateDataRows=""
@@ -12,7 +13,7 @@
       (cdkDropListDropped)="table.drop($event)"
       [cdkDropListDisabled]="!table.getOrdering()?.allow">
       <ng-container [cdkColumnDef]="column.field" *ngFor="let column of table.getColumns()">
-        <cdk-header-cell *cdkHeaderCellDef mat-sort-header [disabled]="!column?.sortable">
+        <th cdk-header-cell *cdkHeaderCellDef mat-sort-header [disabled]="!column?.sortable">
           <span *ngIf="column?.selection && table.selection.allow" (click)="$event.stopPropagation()">
             <mat-checkbox
               *ngIf="table.getSelection().multiple"
@@ -25,8 +26,8 @@
             </mat-checkbox>
           </span>
           <span>{{ column.label }}</span>
-        </cdk-header-cell>
-        <cdk-cell class="table-cell" *cdkCellDef="let element; let index = dataIndex">
+        </th>
+        <td cdk-cell class="table-cell" *cdkCellDef="let element; let index = dataIndex">
           <div>
             <span *ngIf="column?.selection && table.selection.allow" (click)="$event.stopPropagation()">
               <mat-checkbox
@@ -61,48 +62,17 @@
                 }"></ng-container>
             </ng-template>
           </div>
-        </cdk-cell>
-      </ng-container>
-
-      <ng-container [cdkColumnDef]="table.actionsDataField">
-        <cdk-header-cell
-          *cdkHeaderCellDef
-          [ngClass]="{
-            'table-action-column': table.getActionItems().length > 0
-          }"></cdk-header-cell>
-        <cdk-cell
-          *cdkCellDef="let element; let index = dataIndex"
-          [ngClass]="{
-            'table-action-column': table.getActionItems().length > 0
-          }">
-          <span>
-            <button
-              class="table-action-button"
-              mat-icon-button
-              [matMenuTriggerFor]="menu"
-              (click)="$event.stopPropagation()">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button
-                class="menu-action-button"
-                mat-menu-item
-                *ngFor="let action of table.getActionItems()"
-                (mouseover)="action?.hover ? action.hover(element, index) : null"
-                (click)="action?.click ? action.click(element, table.parentElement, index) : null">
-                <mat-icon>{{ action.icon }}</mat-icon>
-                <span>{{ action.label }}</span>
-              </button>
-            </mat-menu>
-          </span>
-        </cdk-cell>
+        </td>
       </ng-container>
 
       <ng-container
         [cdkColumnDef]="table.expandedDetailDataField"
         *ngIf="table.expandable.allow && table.isExpandableTemplate()">
-        <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
-        <cdk-cell *cdkCellDef="let element; let index = dataIndex" [attr.colspan]="table.getColumns().length">
+        <th cdk-header-cell *cdkHeaderCellDef></th>
+        <td
+          cdk-cell
+          *cdkCellDef="let element; let index = dataIndex"
+          [attr.colspan]="table.getDisplayedColumns().length">
           <div
             class="table-expandable-row-content"
             *ngIf="table.expandableRenderingSelectionModel.isSelected(element)"
@@ -116,14 +86,17 @@
                 }"></ng-container>
             </div>
           </div>
-        </cdk-cell>
+        </td>
       </ng-container>
 
       <ng-container
         [cdkColumnDef]="table.expandedTableDataField"
         *ngIf="table.table && table.expandable.allow && table.isExpandableTable()">
-        <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
-        <cdk-cell *cdkCellDef="let element; let index = dataIndex" [attr.colspan]="table.getColumns().length">
+        <th cdk-header-cell *cdkHeaderCellDef></th>
+        <td
+          cdk-cell
+          *cdkCellDef="let element; let index = dataIndex"
+          [attr.colspan]="table.getDisplayedColumns().length">
           <div
             class="table-expandable-row-content"
             *ngIf="table.expandableRenderingSelectionModel.isSelected(element)"
@@ -136,31 +109,60 @@
                 }"></ng-container>
             </div>
           </div>
-        </cdk-cell>
+        </td>
       </ng-container>
 
-      <cdk-header-row class="table-header-row" *cdkHeaderRowDef="table.getDisplayedColumns()"></cdk-header-row>
-      <cdk-row
+      <tr cdk-header-row class="table-header-row" *cdkHeaderRowDef="table.getDisplayedColumns()"></tr>
+      <tr
+        #tableRow
         class="table-row"
-        *cdkRowDef="let row; columns: table.getDisplayedColumns()"
+        *cdkRowDef="let row; columns: table.getDisplayedColumns(); let index = dataIndex"
         [attr.id]="table.tableId"
-        [class.disabled-ordering]="!table.getOrdering()?.allow"
-        matRipple
-        [matRippleDisabled]="!table.getRipple().allow"
+        [class.disabled-ordering]="!table.ordering.allow"
         [ngClass]="table.selectionModel.isSelected(row) ? 'cdk-row-selected ' + table.selection.cssClass : ''"
         cdkDrag
         [cdkDragBoundary]="table.getOrdering()?.boundary ? '.table' : ''"
         [cdkDragPreviewClass]="table.getOrdering().dragPreviewCssClass"
         (cdkDragStarted)="table.onStartedDraggingRow()"
         (cdkDragEnded)="table.onEndedDraggingRow()">
-      </cdk-row>
+        <ng-container cdkCellOutlet></ng-container>
+        @if (table.ordering.allow) {
+          <mat-icon class="drag-handler" cdkDragHandle> drag_indicator </mat-icon>
+        }
+        @if (table.actions.allow && table.getActionItems().length > 0) {
+          <mat-icon
+            class="action-button"
+            [ngClass]="{ 'table-display-block': matMenuTrigger.menuOpen }"
+            [matMenuTriggerFor]="menu"
+            #matMenuTrigger="matMenuTrigger">
+            more_vert
+          </mat-icon>
+          <mat-menu #menu="matMenu">
+            <button
+              class="menu-action-button"
+              mat-menu-item
+              *ngFor="let action of table.getActionItems()"
+              (mouseover)="action?.hover ? action.hover(row, index) : null"
+              (click)="action?.click ? action.click(row, table.parentElement, index) : null">
+              <mat-icon>{{ action.icon }}</mat-icon>
+              <span>{{ action.label }}</span>
+            </button>
+          </mat-menu>
+        }
+        <div *cdkDragPreview>Moving 1 row</div>
+        <div
+          class="ripple-overlay"
+          matRipple
+          [matRippleTrigger]="tableRow"
+          [matRippleDisabled]="!table.getRipple().allow"></div>
+      </tr>
       <div *ngIf="table.expandable.allow && table.isExpandableTemplate()">
-        <cdk-row *cdkRowDef="let row; columns: [table.expandedDetailDataField]" class="table-expandable-row"></cdk-row>
+        <tr cdk-row *cdkRowDef="let row; columns: [table.expandedDetailDataField]" class="table-expandable-row"></tr>
       </div>
       <div *ngIf="table.table && table.expandable.allow && table.isExpandableTable()">
-        <cdk-row *cdkRowDef="let row; columns: [table.expandedTableDataField]" class="table-expandable-row"></cdk-row>
+        <tr cdk-row *cdkRowDef="let row; columns: [table.expandedTableDataField]" class="table-expandable-row"></tr>
       </div>
-    </cdk-table>
+    </table>
 
     <div class="table-row" *ngIf="table.getDataSource().length == 0">Nothing here</div>
     <mat-paginator

@@ -395,9 +395,7 @@ export class Table<T> implements Required<TableConfig<T>> {
   }
 
   getDisplayedColumns(): string[] {
-    const columns = this.columns.filter(column => column.display).map(column => column.field);
-    if (this.actions.allow && this.actions.items.length > 0) columns.push(this.actionsDataField);
-    return columns;
+    return this.columns.filter(column => column.display).map(column => column.field);
   }
 
   isTableActionsDirectionSpeedDial(): boolean {
