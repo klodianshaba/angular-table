@@ -13,17 +13,19 @@
           @for (column of table.columns; track column) {
             @if (column.display) {
               <th [mat-sort-header]="column.field" [disabled]="!column?.sortable">
-                @if (column?.selection && table.selection.allow && table.selection.multiple) {
-                  <mat-checkbox
-                    color="primary"
-                    (click)="$event.stopPropagation()"
-                    (change)="table.selectAllToggle()"
-                    [checked]="table.selectionModel.hasValue() && table.areAllSelected()"
-                    [indeterminate]="table.selectionModel.hasValue() && !table.areAllSelected()"
-                    [aria-label]="table.checkboxLabel()">
-                  </mat-checkbox>
-                }
-                <span>{{ column.label }}</span>
+                <div>
+                  @if (column?.selection && table.selection.allow && table.selection.multiple) {
+                    <mat-checkbox
+                      color="primary"
+                      (click)="$event.stopPropagation()"
+                      (change)="table.selectAllToggle()"
+                      [checked]="table.selectionModel.hasValue() && table.areAllSelected()"
+                      [indeterminate]="table.selectionModel.hasValue() && !table.areAllSelected()"
+                      [aria-label]="table.checkboxLabel()">
+                    </mat-checkbox>
+                  }
+                  <span>{{ column.label }}</span>
+                </div>
               </th>
             }
           }
