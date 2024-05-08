@@ -42,6 +42,28 @@ main {
   app-table {
     flex-grow: 1;
   }
+  .books-custom-template {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $page-padding;
+    .book-custom-template {
+      min-width: 50px;
+      min-height: 50px;
+      border: 1px solid $border-color;
+      padding: $padding;
+      border-radius: $border-radius;
+      background-color: white;
+      transition: 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .book-custom-template:hover {
+      box-shadow: $box-shadow;
+      transform: translateY(-5px);
+    }
+  }
 }
 @media only screen and (max-width: 800px) {
   main {
