@@ -38,16 +38,6 @@ export class CustomizeComponent {
     public dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
-  allowExpanationChange() {
-    this.table().columns[0].expandable = this.table().expandable.allow;
-    this.table().refresh();
-  }
-  expandableTemplateChange(expandableType: TableExtendableTypes) {
-    if (expandableType === TableExtendableTypes.template)
-      this.table().templates.expandableTemplate = 'booksCustomTemplate';
-    if (expandableType === TableExtendableTypes.table) this.table().templates.expandableTemplate = 'booksTableTemplate';
-    this.table().refresh();
-  }
   actionChange(event: MatCheckboxChange, action: TableActionItemMetaData) {
     action.display = () => event.checked;
     this.table().refresh();

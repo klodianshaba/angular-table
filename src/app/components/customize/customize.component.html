@@ -40,14 +40,14 @@
 </mat-slide-toggle>
 
 <div class="customize-section">
-  <strong>Expanation</strong>
+  <strong>Expandable</strong>
 </div>
 <mat-slide-toggle
   class="padding-right"
   color="primary"
   [(ngModel)]="table().expandable.allow"
-  (ngModelChange)="allowExpanationChange()">
-  Allow expanation
+  (ngModelChange)="table().refresh()">
+  Allow expand
 </mat-slide-toggle>
 <mat-slide-toggle
   class="padding-right"
@@ -61,11 +61,11 @@
 </mat-slide-toggle>
 
 <div class="customize-section padding-bottom-0">
-  <strong>Expanation Types</strong>
+  <strong>Expandable Types</strong>
 </div>
 <mat-radio-group
   [(ngModel)]="table().expandable.type"
-  (ngModelChange)="expandableTemplateChange($event)"
+  (ngModelChange)="table().refresh()"
   color="primary"
   aria-label="Select an option">
   <mat-radio-button [value]="TableExtendableTypes.template">Template</mat-radio-button>

@@ -57,7 +57,7 @@
                         [aria-label]="table.checkboxLabel(row, row[column.field])">
                       </mat-checkbox>
                     }
-                    @if (column?.expandable) {
+                    @if (column?.expandable && table.expandable.allow) {
                       <mat-icon class="table-expandable-row-icon" (click)="table.expandRow(row)">
                         <span *ngIf="table.expandableSelectionModel.isSelected(row)">expand_more</span>
                         <span *ngIf="!table.expandableSelectionModel.isSelected(row)">chevron_right</span>
