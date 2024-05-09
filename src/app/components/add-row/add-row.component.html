@@ -1,4 +1,10 @@
-<h2 mat-dialog-title>Add Row</h2>
+<h2 mat-dialog-title>
+  @if (data.id) {
+    Edit Row
+  } @else {
+    Add Row
+  }
+</h2>
 <mat-dialog-content>
   <div class="fields">
     @for (column of data.columns; track column) {
@@ -20,5 +26,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-stroked-button (click)="dialogRef.close()">Close</button>
-  <button mat-raised-button color="primary" (click)="addRow()">Add</button>
+  <button mat-raised-button color="primary" (click)="addRow()">Save</button>
 </mat-dialog-actions>

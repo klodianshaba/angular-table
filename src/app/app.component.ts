@@ -16,6 +16,9 @@ import { DataSource, AuthorModel } from './models/author-model';
 import { MatIcon } from '@angular/material/icon';
 import { NgOptimizedImage } from '@angular/common';
 import { MatRipple } from '@angular/material/core';
+import { AddRowDataModel } from './models/add-row-data-model';
+import { AddRowComponent } from './components/add-row/add-row.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -121,7 +124,9 @@ export class AppComponent {
           label: 'Edit',
           icon: 'edit',
           color: 'warn',
-          click: (row: AuthorModel, parentRow, index) => {},
+          click: (row: AuthorModel, parentRow, index) => {
+            this.editRow(row, index);
+          },
           display: () => true,
         },
         {
@@ -139,12 +144,30 @@ export class AppComponent {
     table: this.booksTable,
   });
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.loadData();
   }
 
   loadData() {
     this.table.dataSource = DataSource;
     this.table.expandRow(this.table.dataSource[0]);
+  }
+  editRow(row: AuthorModel, index: number): void {
+    const data: AddRowDataModel = {
+      columns: this.table.columns,
+      author: { ...row },
+      id: index + 1,
+    };
+    const dialogRef = this.dialog.open(AddRowComponent, {
+      data,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        Object.keys(result).forEach(key => {
+          this.table.dataSource[index][key] = result[key];
+        });
+        this.table.refresh();
+      }
+    });
   }
 }
