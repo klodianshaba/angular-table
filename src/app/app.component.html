@@ -22,7 +22,7 @@
       <ng-template tableTemplate="authorsTableTemplate" let-column let-row="row" let-index="index">
         @switch (column.field) {
           @case ('author') {
-            <a href="javascript:">{{ row[column.field] }}</a>
+            <a href="javascript:" (click)="editRow(row, index)">{{ row[column.field] }}</a>
           }
           @case ('nationality') {
             <img class="padding-right" ngSrc="favicon.ico" width="25" height="25" alt="Angular logo" />
