@@ -2,18 +2,18 @@
 @import './variables';
 html,
 body {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
   height: 100%;
   scrollbar-width: thin;
   margin: 0;
   scrollbar-color: gray transparent;
 }
-body {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+body.dragging {
+  cursor: move;
 }
 .mat-mdc-form-field-subscript-wrapper {
   display: none !important;
 }
-
 .padding-0 {
   padding: 0 !important;
 }

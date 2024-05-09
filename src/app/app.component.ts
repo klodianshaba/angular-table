@@ -40,6 +40,8 @@ export class AppComponent {
   private booksTable = new Table({
     dataSource: [],
     dataSourceProperty: 'books',
+    templates: { dragPreviewTemplate: 'booksPreviewTemplate' },
+    ordering: { template: true },
     pagination: { allow: false },
     columns: [
       {
@@ -67,7 +69,11 @@ export class AppComponent {
   });
   public table = new Table<AuthorModel>({
     dataSource: [],
-    templates: { columnsTemplate: 'authorsTableTemplate', expandableTemplate: 'booksCustomTemplate' },
+    templates: {
+      columnsTemplate: 'authorsTableTemplate',
+      expandableTemplate: 'booksCustomTemplate',
+      dragPreviewTemplate: 'authorsPreviewTemplate',
+    },
     operation: { type: TableOperationTypes.datasource, endpoint: '/search' },
     selection: { allow: true, subscribe: () => {} },
     pagination: {
@@ -75,7 +81,7 @@ export class AppComponent {
       size: 12,
     },
     expandable: { allow: true, type: TableExtendableTypes.template },
-    ordering: { boundary: false },
+    ordering: { boundary: false, template: true },
     columns: [
       {
         display: true,

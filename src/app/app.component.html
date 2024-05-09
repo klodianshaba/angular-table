@@ -60,6 +60,12 @@
           }
         </div>
       </ng-template>
+      <ng-template tableTemplate="authorsPreviewTemplate" let-row let-index="index">
+        {{ row.author }}
+      </ng-template>
+      <ng-template tableTemplate="booksPreviewTemplate" let-row let-index="index">
+        {{ row.title }}
+      </ng-template>
     </app-table>
   </main>
 </div>

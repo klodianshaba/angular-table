@@ -111,7 +111,19 @@
                 }
               </mat-menu>
             }
-            <div *cdkDragPreview>Moving</div>
+            <div *cdkDragPreview>
+              @if (!table.ordering.template) {
+                Moving
+              } @else {
+                <ng-container
+                  [ngTemplateOutlet]="getTemplate(table.templates.dragPreviewTemplate)"
+                  [ngTemplateOutletContext]="{
+                    $implicit: row,
+                    index: index
+                  }">
+                </ng-container>
+              }
+            </div>
             <div
               class="ripple-overlay"
               matRipple

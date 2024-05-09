@@ -96,11 +96,13 @@ export interface TableRippleRowMetaData {
 export interface TableTemplatesMetaData {
   columnsTemplate?: string;
   expandableTemplate?: string;
+  dragPreviewTemplate?: string;
 }
 
 export interface TableOrderingMetaData {
   allow?: boolean;
   boundary?: boolean;
+  template?: boolean;
   dragPreviewCssClass?: string;
   subscribe?: (ordered: any[]) => void;
 }
@@ -216,6 +218,7 @@ export class Table<T> implements Required<TableConfig<T>> {
   templates: TableTemplatesMetaData = {
     columnsTemplate: 'columnsTemplate',
     expandableTemplate: 'expandableTemplate',
+    dragPreviewTemplate: 'dragPreviewTemplate',
   };
   tableId: string = 'table';
   actions: TableActionMetaData = {
@@ -245,6 +248,7 @@ export class Table<T> implements Required<TableConfig<T>> {
   ordering: TableOrderingMetaData = {
     allow: true,
     boundary: true,
+    template: false,
     dragPreviewCssClass: 'table-drag-preview',
   };
   expandable: TableExtendableMetaData = {
