@@ -4,13 +4,6 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-
-  header,
-  main {
-    padding: $page-padding;
-    transition: 0.3s;
-  }
-
   header {
     display: flex;
     justify-content: space-between;
@@ -18,6 +11,7 @@
     z-index: 2 !important;
     background: white;
     box-shadow: $box-shadow;
+    padding: $page-padding;
     strong {
       font-size: $large-text;
     }
@@ -37,26 +31,25 @@
       }
     }
   }
-
   main,
   main app-customize {
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: gray transparent;
   }
-
   main {
     display: flex;
-    gap: $page-padding;
     height: 100%;
     app-customize {
       max-width: 500px;
-      min-width: 300px;
+      min-width: 210px;
       position: sticky;
       top: 0;
+      padding: $page-padding;
     }
     app-table {
       flex-grow: 1;
+      padding: $page-padding;
     }
     app-table:after {
       content: '';
