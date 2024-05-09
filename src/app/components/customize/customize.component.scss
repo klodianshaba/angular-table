@@ -1,4 +1,18 @@
 @import '../../../variables';
-.customize-section {
-  padding: $padding 0;
+.section {
+  .section-title {
+    padding: $padding 0;
+  }
+  .section-options {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $padding;
+    .flex-basis-100 {
+      flex-basis: 100%;
+    }
+  }
+  .section-options.gap-0 {
+    gap: 0;
+  }
 }

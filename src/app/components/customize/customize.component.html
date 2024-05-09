@@ -1,107 +1,141 @@
-<div class="customize-section padding-0">
-  <strong>Columns</strong>
-</div>
-@for (column of table().columns; track column) {
-  <mat-checkbox color="primary" [(ngModel)]="column.display" (ngModelChange)="table().refresh()">
-    {{ column.label }}
-  </mat-checkbox>
-}
-
-<div class="customize-section padding-0">
-  <strong>Actions</strong>
-</div>
-<mat-slide-toggle color="primary" [(ngModel)]="table().actions.allow" (ngModelChange)="table().refresh()">
-  Allow actions
-</mat-slide-toggle>
-@for (action of table().actions.items; track action) {
-  <mat-checkbox color="primary" [checked]="action?.display(null, null)" (change)="actionChange($event, action)">
-    {{ action.label }}
-  </mat-checkbox>
-}
-
-<div class="customize-section padding-top-0">
-  <strong>Pagination</strong>
-</div>
-<mat-slide-toggle color="primary" [(ngModel)]="table().pagination.allow" (ngModelChange)="table().refresh()">
-  Allow pagination
-</mat-slide-toggle>
-<div class="padding-top">
-  <mat-form-field>
-    <mat-label>Item per page</mat-label>
-    <input matInput type="number" [(ngModel)]="table().pagination.size" (ngModelChange)="table().refresh()" />
-  </mat-form-field>
+<div class="section">
+  <div class="section-title padding-0">
+    <strong>Columns</strong>
+  </div>
+  <div class="section-options">
+    <div>
+      @for (column of table().columns; track column) {
+        <mat-checkbox color="primary" [(ngModel)]="column.display" (ngModelChange)="table().refresh()">
+          {{ column.label }}
+        </mat-checkbox>
+      }
+    </div>
+  </div>
 </div>
 
-<div class="customize-section">
-  <strong>Selection</strong>
-</div>
-<mat-slide-toggle color="primary" [(ngModel)]="table().selection.allow" (ngModelChange)="table().refresh()">
-  Allow Selection
-</mat-slide-toggle>
+<div class="section">
+  <div class="section-title padding-0">
+    <strong>Actions</strong>
+  </div>
+  <div class="section-options gap-0">
+    <mat-slide-toggle class="" color="primary" [(ngModel)]="table().actions.allow" (ngModelChange)="table().refresh()">
+      Allow actions
+    </mat-slide-toggle>
 
-<div class="customize-section">
-  <strong>Expandable</strong>
+    @for (action of table().actions.items; track action) {
+      <mat-checkbox color="primary" [checked]="action?.display(null, null)" (change)="actionChange($event, action)">
+        {{ action.label }}
+      </mat-checkbox>
+    }
+  </div>
 </div>
-<mat-slide-toggle
-  class="padding-right"
-  color="primary"
-  [(ngModel)]="table().expandable.allow"
-  (ngModelChange)="table().refresh()">
-  Allow expand
-</mat-slide-toggle>
-<mat-slide-toggle
-  class="padding-right"
-  color="primary"
-  [(ngModel)]="table().expandable.multiple"
-  (ngModelChange)="table().refresh()">
-  Expand multiple rows
-</mat-slide-toggle>
-<mat-slide-toggle color="primary" [checked]="table().areAllExpanded()" (click)="expandAllToggleChange()">
-  Expand all
-</mat-slide-toggle>
 
-<div class="customize-section padding-bottom-0">
-  <strong>Expandable Types</strong>
+<div class="section">
+  <div class="section-title padding-top-0">
+    <strong>Pagination</strong>
+  </div>
+  <div class="section-options">
+    <mat-slide-toggle color="primary" [(ngModel)]="table().pagination.allow" (ngModelChange)="table().refresh()">
+      Allow pagination
+    </mat-slide-toggle>
+    <div class="flex-basis-100">
+      <mat-form-field>
+        <mat-label>Item per page</mat-label>
+        <input matInput type="number" [(ngModel)]="table().pagination.size" (ngModelChange)="table().refresh()" />
+      </mat-form-field>
+    </div>
+  </div>
 </div>
-<mat-radio-group
-  [(ngModel)]="table().expandable.type"
-  (ngModelChange)="table().refresh()"
-  color="primary"
-  aria-label="Select an option">
-  <mat-radio-button [value]="TableExtendableTypes.template">Template</mat-radio-button>
-  <mat-radio-button [value]="TableExtendableTypes.table">Table</mat-radio-button>
-</mat-radio-group>
 
-<div class="customize-section padding-top-0">
-  <strong>Sorting</strong>
+<div class="section">
+  <div class="section-title">
+    <strong>Selection</strong>
+  </div>
+  <div class="section-options">
+    <mat-slide-toggle color="primary" [(ngModel)]="table().selection.allow" (ngModelChange)="table().refresh()">
+      Allow Selection
+    </mat-slide-toggle>
+    <mat-slide-toggle color="primary" [(ngModel)]="table().selection.multiple" (ngModelChange)="table().refresh()">
+      Select multiple rows
+    </mat-slide-toggle>
+  </div>
 </div>
-<mat-slide-toggle color="primary" [(ngModel)]="table().sorting.allow" (ngModelChange)="table().refresh()">
-  Allow sorting
-</mat-slide-toggle>
 
-<div class="customize-section">
-  <strong>Ordering</strong>
+<div class="section">
+  <div class="section-title">
+    <strong>Expandable</strong>
+  </div>
+  <div class="section-options">
+    <mat-slide-toggle color="primary" [(ngModel)]="table().expandable.allow" (ngModelChange)="table().refresh()">
+      Allow expand
+    </mat-slide-toggle>
+    <mat-slide-toggle color="primary" [(ngModel)]="table().expandable.multiple" (ngModelChange)="table().refresh()">
+      Expand multiple rows
+    </mat-slide-toggle>
+    <mat-slide-toggle color="primary" [checked]="table().areAllExpanded()" (click)="expandAllToggleChange()">
+      Expand all
+    </mat-slide-toggle>
+  </div>
 </div>
-<mat-slide-toggle
-  class="padding-right"
-  color="primary"
-  [(ngModel)]="table().ordering.allow"
-  (ngModelChange)="table().refresh()">
-  Allow ordering
-</mat-slide-toggle>
-<mat-slide-toggle color="primary" [(ngModel)]="table().ordering.boundary" (ngModelChange)="table().refresh()">
-  Boundary
-</mat-slide-toggle>
 
-<div class="customize-section">
-  <strong>Ripple</strong>
+<div class="section">
+  <div class="section-title padding-bottom-0">
+    <strong>Expandable Types</strong>
+  </div>
+  <div class="section-options">
+    <mat-radio-group
+      [(ngModel)]="table().expandable.type"
+      (ngModelChange)="table().refresh()"
+      color="primary"
+      aria-label="Select an option">
+      <mat-radio-button [value]="TableExtendableTypes.template">Template</mat-radio-button>
+      <mat-radio-button [value]="TableExtendableTypes.table">Table</mat-radio-button>
+    </mat-radio-group>
+  </div>
 </div>
-<mat-slide-toggle color="primary" [(ngModel)]="table().ripple.allow" (ngModelChange)="table().refresh()">
-  Allow ripple
-</mat-slide-toggle>
 
-<div class="customize-section">
-  <strong>Datasource</strong>
+<div class="section">
+  <div class="section-title padding-top-0">
+    <strong>Sorting</strong>
+  </div>
+  <div class="section-options">
+    <mat-slide-toggle color="primary" [(ngModel)]="table().sorting.allow" (ngModelChange)="table().refresh()">
+      Allow sorting
+    </mat-slide-toggle>
+  </div>
 </div>
-<button mat-raised-button color="primary" class="margin-right" (click)="addRow()">Add Row</button>
-<button mat-raised-button color="primary" (click)="addColumn()">Add Column</button>
+
+<div class="section">
+  <div class="section-title">
+    <strong>Ordering</strong>
+  </div>
+  <div class="section-options">
+    <mat-slide-toggle color="primary" [(ngModel)]="table().ordering.allow" (ngModelChange)="table().refresh()">
+      Allow ordering
+    </mat-slide-toggle>
+    <mat-slide-toggle color="primary" [(ngModel)]="table().ordering.boundary" (ngModelChange)="table().refresh()">
+      Boundary
+    </mat-slide-toggle>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">
+    <strong>Ripple</strong>
+  </div>
+  <div class="section-options">
+    <mat-slide-toggle color="primary" [(ngModel)]="table().ripple.allow" (ngModelChange)="table().refresh()">
+      Allow ripple
+    </mat-slide-toggle>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">
+    <strong>Datasource</strong>
+  </div>
+  <div class="section-options">
+    <button mat-raised-button color="primary" (click)="addRow()">Add Row</button>
+    <button mat-raised-button color="primary" (click)="addColumn()">Add Column</button>
+  </div>
+</div>
