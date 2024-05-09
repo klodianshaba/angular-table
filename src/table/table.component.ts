@@ -171,9 +171,7 @@ export class TableColumnMetaData {
   display: boolean;
   text?: (data: any) => Observable<string>;
   template?: boolean;
-  selection?: boolean;
   sortable?: boolean;
-  expandable?: boolean;
   cssClass?: string;
 
   constructor(config: TableColumnMetaData = { label: '', field: '', display: true }) {

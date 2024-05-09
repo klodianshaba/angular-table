@@ -10,11 +10,11 @@
       [cdkDropListDisabled]="!table.ordering.allow">
       <thead>
         <tr class="table-header-row">
-          @for (column of table.columns; track column) {
+          @for (column of table.columns; track column; let first = $first) {
             @if (column.display) {
               <th [mat-sort-header]="column.field" [disabled]="!column?.sortable">
                 <div>
-                  @if (column?.selection && table.selection.allow && table.selection.multiple) {
+                  @if (first && table.selection.allow && table.selection.multiple) {
                     <mat-checkbox
                       color="primary"
                       (click)="$event.stopPropagation()"
@@ -44,11 +44,11 @@
             [cdkDragPreviewClass]="table.ordering.dragPreviewCssClass"
             (cdkDragStarted)="table.onStartedDraggingRow()"
             (cdkDragEnded)="table.onEndedDraggingRow()">
-            @for (column of table.columns; track column) {
+            @for (column of table.columns; track column; let first = $first) {
               @if (column.display) {
                 <td class="table-cell">
                   <div>
-                    @if (column?.selection && table.selection.allow) {
+                    @if (first && table.selection.allow) {
                       <mat-checkbox
                         color="primary"
                         (change)="table.selectRow(row)"
@@ -57,7 +57,7 @@
                         [aria-label]="table.checkboxLabel(row, row[column.field])">
                       </mat-checkbox>
                     }
-                    @if (column?.expandable && table.expandable.allow) {
+                    @if (first && table.expandable.allow) {
                       <mat-icon class="table-expandable-row-icon" (click)="table.expandRow(row)">
                         <span *ngIf="table.expandableSelectionModel.isSelected(row)">expand_more</span>
                         <span *ngIf="!table.expandableSelectionModel.isSelected(row)">chevron_right</span>
