@@ -35,7 +35,6 @@
         @for (row of table.getDataSource(); track row; let index = $index) {
           <tr
             #tableRow
-            @tableAnimation
             class="table-row {{ table.selectionModel.isSelected(row) ? table.selection.cssClass : '' }}"
             [attr.id]="table.tableId"
             [ngClass]="{ 'table-row-selected': table.selectionModel.isSelected(row), '': true }"
