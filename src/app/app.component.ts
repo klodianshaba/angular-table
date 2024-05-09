@@ -40,7 +40,7 @@ export class AppComponent {
   private booksTable = new Table({
     dataSource: [],
     dataSourceProperty: 'books',
-    templates: { dragPreviewTemplate: 'booksPreviewTemplate' },
+    templates: { columnsTemplate: 'booksTableTemplate', dragPreviewTemplate: 'booksPreviewTemplate' },
     ordering: { template: true },
     pagination: { allow: false },
     columns: [
@@ -49,6 +49,7 @@ export class AppComponent {
         label: 'Title',
         field: 'title',
         sortable: true,
+        template: true,
       },
       {
         display: true,

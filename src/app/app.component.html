@@ -19,17 +19,17 @@
     <app-customize [table]="table"></app-customize>
 
     <app-table [table]="table">
-      <ng-template tableTemplate="authorsTableTemplate" let-column let-source="source" let-index="index">
+      <ng-template tableTemplate="authorsTableTemplate" let-column let-row="row" let-index="index">
         @switch (column.field) {
           @case ('author') {
-            <a href="javascript:">{{ source[column.field] }}</a>
+            <a href="javascript:">{{ row[column.field] }}</a>
           }
           @case ('nationality') {
             <img class="padding-right" ngSrc="favicon.ico" width="25" height="25" alt="Angular logo" />
-            <span> {{ source[column.field] }}</span>
+            <span> {{ row[column.field] }}</span>
           }
           @case ('awardWinner') {
-            @if (source[column.field]) {
+            @if (row[column.field]) {
               <mat-icon>done</mat-icon>
             } @else {
               <mat-icon>clear</mat-icon>
@@ -39,15 +39,12 @@
       </ng-template>
       <ng-template tableTemplate="booksTableTemplate" let-column let-row="row" let-index="index">
         @switch (column.field) {
-          @case ('id') {
-            <span> {{ row.id }}</span>
-          }
-          @case ('description') {
-            {{ row.description }}
+          @case ('title') {
+            <span> {{ row[column.field] }}</span>
           }
         }
       </ng-template>
-      <ng-template tableTemplate="booksCustomTemplate" let-row="row" let-index="index">
+      <ng-template tableTemplate="booksCustomTemplate" let-row let-index="index">
         <div class="books-custom-template">
           @if (row?.books?.length > 0) {
             @for (book of row.books; track book) {
