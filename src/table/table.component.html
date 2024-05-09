@@ -84,7 +84,7 @@
                       </ng-container>
                     }
 
-                    @if (last && table.actions.allow && table.actions.items.length > 0) {
+                    @if (last && table.actions.allow && table.getDisplayedActions().length > 0) {
                       <div class="actions">
                         <mat-icon
                           class="action-button"

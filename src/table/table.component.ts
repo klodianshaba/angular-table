@@ -361,6 +361,9 @@ export class Table<T> implements Required<TableConfig<T>> {
   getDisplayedColumns(): string[] {
     return this.columns.filter(column => column.display).map(column => column.field);
   }
+  getDisplayedActions(): TableActionItemMetaData[] {
+    return this.actions.items.filter(action => action?.display(null, null));
+  }
 
   onStartedDraggingRow(): void {
     document.body.classList.add('dragging');
