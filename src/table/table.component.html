@@ -44,10 +44,13 @@
             [cdkDragPreviewClass]="table.ordering.dragPreviewCssClass"
             (cdkDragStarted)="table.onStartedDraggingRow()"
             (cdkDragEnded)="table.onEndedDraggingRow()">
-            @for (column of table.columns; track column; let first = $first) {
+            @for (column of table.columns; track column; let first = $first; let last = $last) {
               @if (column.display) {
                 <td class="table-cell">
                   <div>
+                    @if (first && table.ordering.allow) {
+                      <mat-icon class="drag-handler" cdkDragHandle> drag_indicator </mat-icon>
+                    }
                     @if (first && table.selection.allow) {
                       <mat-checkbox
                         color="primary"
@@ -80,36 +83,35 @@
                         }">
                       </ng-container>
                     }
+
+                    @if (last && table.actions.allow && table.actions.items.length > 0) {
+                      <div class="actions">
+                        <mat-icon
+                          class="action-button"
+                          [ngClass]="{ 'table-display-block': matMenuTrigger.menuOpen }"
+                          [matMenuTriggerFor]="menu"
+                          #matMenuTrigger="matMenuTrigger">
+                          more_vert
+                        </mat-icon>
+                        <mat-menu #menu="matMenu">
+                          @for (action of table.actions.items; track action) {
+                            @if (action.display(row, index)) {
+                              <button
+                                class="menu-action-button"
+                                mat-menu-item
+                                (mouseover)="action?.hover ? action.hover(row, index) : null"
+                                (click)="action?.click ? action.click(row, table.parentElement, index) : null">
+                                <mat-icon>{{ action.icon }}</mat-icon>
+                                <span>{{ action.label }}</span>
+                              </button>
+                            }
+                          }
+                        </mat-menu>
+                      </div>
+                    }
                   </div>
                 </td>
               }
-            }
-
-            @if (table.ordering.allow) {
-              <mat-icon class="drag-handler" cdkDragHandle> drag_indicator </mat-icon>
-            }
-            @if (table.actions.allow && table.actions.items.length > 0) {
-              <mat-icon
-                class="action-button"
-                [ngClass]="{ 'table-display-block': matMenuTrigger.menuOpen }"
-                [matMenuTriggerFor]="menu"
-                #matMenuTrigger="matMenuTrigger">
-                more_vert
-              </mat-icon>
-              <mat-menu #menu="matMenu">
-                @for (action of table.actions.items; track action) {
-                  @if (action.display(row, index)) {
-                    <button
-                      class="menu-action-button"
-                      mat-menu-item
-                      (mouseover)="action?.hover ? action.hover(row, index) : null"
-                      (click)="action?.click ? action.click(row, table.parentElement, index) : null">
-                      <mat-icon>{{ action.icon }}</mat-icon>
-                      <span>{{ action.label }}</span>
-                    </button>
-                  }
-                }
-              </mat-menu>
             }
             <div *cdkDragPreview>
               @if (!table.ordering.template) {
