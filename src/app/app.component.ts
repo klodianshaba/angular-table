@@ -89,10 +89,8 @@ export class AppComponent {
         label: 'Author',
         field: 'author',
         fieldType: { field: TableColumnFieldTypes.input, type: 'text' },
-        selection: true,
         sortable: true,
         template: true,
-        expandable: true,
       },
       {
         display: true,
