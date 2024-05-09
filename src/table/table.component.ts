@@ -622,14 +622,13 @@ export class TableComponent implements AfterViewInit, OnDestroy {
     columns: [],
   });
   private _templates: any[] = [];
-  public togStatus: boolean = true;
-  private unSubscribe: Subject<boolean> = new Subject<boolean>();
+  private onDestroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnDestroy(): void {
-    this.unSubscribe.next(true);
-    this.unSubscribe.complete();
+    this.onDestroy$.next(true);
+    this.onDestroy$.complete();
   }
 
   ngAfterViewInit(): void {
@@ -638,19 +637,19 @@ export class TableComponent implements AfterViewInit, OnDestroy {
   }
 
   initSubscribes(table: Table<any>): void {
-    table.detectChanges.pipe(takeUntil(this.unSubscribe)).subscribe(changes => {
+    table.detectChanges.pipe(takeUntil(this.onDestroy$)).subscribe(changes => {
       if (changes) this.cdr.markForCheck();
     });
-    table.selectionChanged.pipe(takeUntil(this.unSubscribe)).subscribe(selection => {
+    table.selectionChanged.pipe(takeUntil(this.onDestroy$)).subscribe(selection => {
       if (selection) this.selectionChanged.emit(selection);
     });
-    table.sortingChanged.pipe(takeUntil(this.unSubscribe)).subscribe(sorting => {
+    table.sortingChanged.pipe(takeUntil(this.onDestroy$)).subscribe(sorting => {
       if (sorting) this.sortingChanged.emit(sorting);
     });
-    table.paginationChanged.pipe(takeUntil(this.unSubscribe)).subscribe(pagination => {
+    table.paginationChanged.pipe(takeUntil(this.onDestroy$)).subscribe(pagination => {
       if (pagination) this.paginationChanged.emit(pagination);
     });
-    table.orderingChanged.pipe(takeUntil(this.unSubscribe)).subscribe(ordering => {
+    table.orderingChanged.pipe(takeUntil(this.onDestroy$)).subscribe(ordering => {
       if (ordering) this.orderingChanged.emit(ordering);
     });
     if (table.hasNestedTable()) {
