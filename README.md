@@ -191,7 +191,6 @@ table = new Table<DataSourceModel>({
 
 ```angular17html
 <app-table [table]="table">
-    ...,
     <ng-template tableTemplate="authorsTableTemplate" let-column let-row="row" let-index="index">
         @switch (column.field) {
             @case ('author') {
