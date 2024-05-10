@@ -226,7 +226,7 @@ export class Table<T> implements Required<TableConfig<T>> {
     items: [],
   };
   operation: TableOperationMetaData = {
-    type: TableOperationTypes.http,
+    type: TableOperationTypes.datasource,
     uri: api,
     endpoint: undefined,
     searchCriteria: {},
