@@ -2,13 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import {
-  Table,
-  TableColumnFieldTypes,
-  TableComponent,
-  TableExtendableTypes,
-  TableOperationTypes,
-} from '../table/table.component';
+import { Table, TableColumnFieldTypes, TableComponent, TableExtendableTypes } from '../table/table.component';
 import { MatButton } from '@angular/material/button';
 import { TableTemplateDirective } from '../table/table-template.directive';
 import { CustomizeComponent } from './components/customize/customize.component';
@@ -40,12 +34,19 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent {
   title = 'angular-table';
-  private booksTable = new Table({
+  booksTable = new Table({
     dataSource: [],
     dataSourceProperty: 'books',
-    templates: { columnsTemplate: 'booksTableTemplate', dragPreviewTemplate: 'booksPreviewTemplate' },
-    ordering: { template: true },
-    pagination: { allow: false },
+    templates: {
+      columnsTemplate: 'booksTableTemplate',
+      dragPreviewTemplate: 'booksPreviewTemplate',
+    },
+    ordering: {
+      template: true,
+    },
+    pagination: {
+      allow: false,
+    },
     columns: [
       {
         display: true,
@@ -71,21 +72,28 @@ export class AppComponent {
       },
     ],
   });
-  public table = new Table<AuthorModel>({
+  table = new Table<AuthorModel>({
     dataSource: [],
     templates: {
       columnsTemplate: 'authorsTableTemplate',
       expandableTemplate: 'booksCustomTemplate',
       dragPreviewTemplate: 'authorsPreviewTemplate',
     },
-    operation: { type: TableOperationTypes.datasource, endpoint: '/search' },
-    selection: { allow: true, subscribe: () => {} },
+    selection: {
+      allow: true,
+    },
     pagination: {
       totalCount: DataSource.length,
       size: 12,
     },
-    expandable: { allow: true, type: TableExtendableTypes.template },
-    ordering: { boundary: false, template: true },
+    expandable: {
+      allow: true,
+      type: TableExtendableTypes.template,
+    },
+    ordering: {
+      boundary: false,
+      template: true,
+    },
     columns: [
       {
         display: true,

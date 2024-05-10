@@ -46,13 +46,11 @@
       </ng-template>
       <ng-template tableTemplate="booksCustomTemplate" let-row let-index="index">
         <div class="books-custom-template">
-          @if (row?.books?.length > 0) {
-            @for (book of row.books; track book) {
-              <div matRipple class="book-custom-template">
-                <strong> {{ book.title }}</strong>
-              </div>
-            }
-          } @else {
+          @for (book of row.books; track book) {
+            <div matRipple class="book-custom-template">
+              <strong> {{ book.title }}</strong>
+            </div>
+          } @empty {
             {{ row.author }} doesn't have books yet!
           }
         </div>
