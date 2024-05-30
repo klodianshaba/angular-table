@@ -259,3 +259,26 @@ this.table.dataSource.splice(0, 1); // delete row
 this.table.dataSource.unshift(rowData); // add row
 ...
 ```
+
+## Styling
+
+```css
+app-table {
+  --table-bg-color: #ffffff;
+  --table-row-bg-color: #ffffff;
+  --table-expand-row-bg-color: #ffffff;
+  --table-header-row-bg-color: #ffffff;
+  --table-footer-row-bg-color: #ffffff;
+  --table-hover-row-bg-color: #ebebfc;
+  --table-selected-row-bg-color: #f6f6fd;
+  --table-box-shadow: 0 0 3px 1px rgba(25, 23, 28, 0.05);
+  --table-border-color: #eeeaea;
+  --table-text-color: black;
+  --table-padding: 12px;
+  --table-expand-row-padding: 20px;
+  --table-font-size: 14px;
+  --table-font-family: Roboto, 'Helvetica Neue', sans-serif;
+  --table-min-width: 300px;
+  --table-row-min-height: 40px;
+}
+```
