@@ -14,7 +14,7 @@ import { MatRipple } from '@angular/material/core';
 import { AddRowDataModel } from './models/add-row-data-model';
 import { AddRowComponent } from './components/add-row/add-row.component';
 import { MatDialog } from '@angular/material/dialog';
-import { bounceIn, fadeIn, flip, flipIn, jackInTheBox, slideIn, staggerNestedAnimations, swing, zoomIn } from 'ngxa';
+import { bounceIn, staggerNestedAnimations, zoomIn } from 'ngxa';
 
 @Component({
   selector: 'app-root',
@@ -34,18 +34,9 @@ import { bounceIn, fadeIn, flip, flipIn, jackInTheBox, slideIn, staggerNestedAni
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [
-    swing({ stateChangeExpressions: ':enter' }),
-    zoomIn({ stateChangeExpressions: ':enter', timings: '1s' }),
-    zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Down' }),
     zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Up' }),
     bounceIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Down' }),
     bounceIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Left' }),
-    bounceIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Right' }),
-    jackInTheBox({ triggerName: 'jack', stateChangeExpressions: ':enter', timings: '1s' }),
-    slideIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Down' }),
-    flip({ stateChangeExpressions: ':enter', timings: '1s' }),
-    flipIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'X' }),
-    fadeIn({ stateChangeExpressions: ':enter', timings: '1s' }),
     staggerNestedAnimations({
       triggerName: 'stagger',
       stateChangeExpressions: ':enter',

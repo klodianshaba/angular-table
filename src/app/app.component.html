@@ -1,16 +1,16 @@
 <div class="container">
   <header>
-    <div>
-      <img [@zoomIn] class="padding-right" ngSrc="favicon.ico" width="25" height="25" alt="Angular logo" />
-      <strong [@bounceInLeft]>Angular Table</strong>
+    <div [@stagger]>
+      <img [@bounceInDown] class="padding-right" ngSrc="favicon.ico" width="25" height="25" alt="Angular logo" />
+      <strong [@bounceInDown]>Angular Table</strong>
     </div>
     <div [@stagger]>
-      <span [@slideInDown]> &copy; Klodian Shaba</span>
-      <a [@slideInDown] class="padding-left" href="https://github.com/klodianshaba/angular-table" target="_blank">
+      <span [@bounceInDown]> &copy; Klodian Shaba</span>
+      <a [@bounceInDown] class="padding-left" href="https://github.com/klodianshaba/angular-table" target="_blank">
         <img alt="GitHub Logo" ngSrc="./assets/images/GitHub-Mark-32px.png" height="25" width="25" />
       </a>
       <a
-        [@slideInDown]
+        [@bounceInDown]
         class="padding-left"
         href="https://www.linkedin.com/in/klodian-shaba-536269153/"
         target="_blank">
@@ -18,7 +18,6 @@
       </a>
     </div>
   </header>
-
   <main>
     <app-customize [table]="table"></app-customize>
     <app-table [table]="table" [@zoomInUp]>

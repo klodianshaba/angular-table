@@ -15,17 +15,7 @@ import { AddRowComponent } from '../add-row/add-row.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddRowDataModel } from '../../models/add-row-data-model';
 import { TableActionItemMetaData, TableExtendableTypes } from '../../../table/models';
-import {
-  bounceIn,
-  flipIn,
-  jackInTheBox,
-  lightspeedIn,
-  roll,
-  staggerNestedAnimations,
-  swing,
-  wobble,
-  zoomIn,
-} from 'ngxa';
+import { bounceIn, staggerNestedAnimations } from 'ngxa';
 
 @Component({
   selector: 'app-customize',
@@ -44,17 +34,7 @@ import {
   templateUrl: './customize.component.html',
   styleUrl: './customize.component.scss',
   animations: [
-    zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Down' }),
-    zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Up' }),
-    zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Left' }),
-    zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Right' }),
-    swing({ stateChangeExpressions: ':enter' }),
-    jackInTheBox({ stateChangeExpressions: ':enter', triggerName: 'jack' }),
     bounceIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Left' }),
-    lightspeedIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Left' }),
-    roll({ stateChangeExpressions: ':enter', timings: '1s', direction: 'In' }),
-    flipIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'X' }),
-    wobble({ stateChangeExpressions: ':enter', timings: '1s', triggerName: 'wobble' }),
     staggerNestedAnimations({
       triggerName: 'stagger',
       stateChangeExpressions: ':enter',
