@@ -10,7 +10,6 @@
     align-items: center;
     z-index: 2 !important;
     background: white;
-    box-shadow: $box-shadow;
     padding: $page-padding;
     strong {
       font-size: $large-text;
@@ -46,10 +45,12 @@
       position: sticky;
       top: 0;
       padding: $page-padding;
+      overflow-x: hidden;
     }
     app-table {
       flex-grow: 1;
       padding: $page-padding;
+      --table-box-shadow: none;
     }
     app-table:after {
       content: '';

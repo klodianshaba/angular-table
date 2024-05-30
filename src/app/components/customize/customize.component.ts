@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Table, TableActionItemMetaData, TableExtendableTypes } from '../../../table/table.component';
+import { Table } from '../../../table/table.component';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +14,18 @@ import { AddColumnDataModel } from '../../models/add-column-data-model';
 import { AddRowComponent } from '../add-row/add-row.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddRowDataModel } from '../../models/add-row-data-model';
+import { TableActionItemMetaData, TableExtendableTypes } from '../../../table/models';
+import {
+  bounceIn,
+  flipIn,
+  jackInTheBox,
+  lightspeedIn,
+  roll,
+  staggerNestedAnimations,
+  swing,
+  wobble,
+  zoomIn,
+} from 'ngxa';
 
 @Component({
   selector: 'app-customize',
@@ -31,9 +43,29 @@ import { AddRowDataModel } from '../../models/add-row-data-model';
   ],
   templateUrl: './customize.component.html',
   styleUrl: './customize.component.scss',
+  animations: [
+    zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Down' }),
+    zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Up' }),
+    zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Left' }),
+    zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Right' }),
+    swing({ stateChangeExpressions: ':enter' }),
+    jackInTheBox({ stateChangeExpressions: ':enter', triggerName: 'jack' }),
+    bounceIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Left' }),
+    lightspeedIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Left' }),
+    roll({ stateChangeExpressions: ':enter', timings: '1s', direction: 'In' }),
+    flipIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'X' }),
+    wobble({ stateChangeExpressions: ':enter', timings: '1s', triggerName: 'wobble' }),
+    staggerNestedAnimations({
+      triggerName: 'stagger',
+      stateChangeExpressions: ':enter',
+      timings: '300ms',
+      nestedAnimations: 'none',
+    }),
+  ],
 })
 export class CustomizeComponent {
   table = input.required<Table<AuthorModel>>();
+  status: boolean = true;
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar
