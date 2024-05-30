@@ -1,0 +1,42 @@
+.welcome {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  .title {
+    font-size: 30px;
+    padding-bottom: 10px;
+  }
+  .description {
+    padding-bottom: 20px;
+  }
+  .actions button:first-child {
+    margin-right: 10px;
+  }
+  .offers {
+    //overflow-x: hidden;
+  }
+  ul {
+    padding-left: 20px;
+    //list-style: none;
+    li {
+      position: relative;
+      padding: 5px;
+      border-radius: 20px;
+      cursor: pointer;
+      a {
+        text-decoration: none;
+        margin-left: 10px;
+        color: #3f51b5;
+      }
+    }
+    li:hover {
+      background-color: #3f51b5;
+      a {
+        //font-weight: bold;
+        color: white;
+      }
+    }
+  }
+}
