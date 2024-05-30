@@ -1,5 +1,5 @@
-import { TableColumnMetaData } from '../../table/table.component';
 import { AuthorModel } from './author-model';
+import { TableColumnMetaData } from '../../table/models';
 
 export interface AddRowDataModel {
   columns: TableColumnMetaData[];

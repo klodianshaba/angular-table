@@ -1,4 +1,4 @@
-import { Component, Inject, ViewChild, ViewChildren } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
 import { AddColumnDataModel } from '../../models/add-column-data-model';
-import { TableColumnFieldTypes, TableColumnMetaData } from '../../../table/table.component';
 import { of } from 'rxjs';
+import { TableColumnFieldTypes, TableColumnMetaData } from '../../../table/models';
 
 export interface DialogDataModel {}
 

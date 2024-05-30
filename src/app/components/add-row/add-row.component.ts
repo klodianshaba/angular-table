@@ -12,8 +12,8 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { AddRowDataModel } from '../../models/add-row-data-model';
-import { TableColumnFieldTypes } from '../../../table/table.component';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { TableColumnFieldTypes } from '../../../table/models';
 
 @Component({
   selector: 'app-add-row',
