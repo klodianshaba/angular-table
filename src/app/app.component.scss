@@ -13,6 +13,7 @@
     padding: $page-padding;
     strong {
       font-size: $large-text;
+      cursor: pointer;
     }
     > div {
       display: flex;
@@ -22,6 +23,7 @@
     a img {
       width: 25px;
       height: 25px;
+      cursor: pointer;
     }
     a img {
       &:hover {
@@ -32,51 +34,9 @@
   }
   main,
   main app-customize {
-    overflow: auto;
-    scrollbar-width: thin;
-    scrollbar-color: gray transparent;
+    overflow: hidden;
   }
   main {
-    display: flex;
     height: 100%;
-    app-customize {
-      max-width: 500px;
-      min-width: 210px;
-      position: sticky;
-      top: 0;
-      padding: $page-padding;
-      overflow-x: hidden;
-    }
-    app-table {
-      flex-grow: 1;
-      padding: $page-padding;
-      --table-box-shadow: none;
-    }
-    app-table:after {
-      content: '';
-      margin: $page-padding;
-    }
-    .books-custom-template {
-      display: flex;
-      flex-wrap: wrap;
-      gap: $page-padding;
-      .book-custom-template {
-        min-width: 50px;
-        min-height: 50px;
-        border: 1px solid $border-color;
-        padding: $padding;
-        border-radius: $border-radius;
-        background-color: white;
-        transition: 0.3s;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-      }
-      .book-custom-template:hover {
-        box-shadow: $box-shadow;
-        transform: scale(0.9);
-      }
-    }
   }
 }

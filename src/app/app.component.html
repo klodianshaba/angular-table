@@ -1,8 +1,15 @@
 <div class="container">
   <header>
     <div [@stagger]>
-      <img [@bounceInDown] class="padding-right" ngSrc="favicon.ico" width="25" height="25" alt="Angular logo" />
-      <strong [@bounceInDown]>Angular Table</strong>
+      <img
+        [@bounceInDown]
+        [routerLink]="'/'"
+        class="padding-right"
+        ngSrc="favicon.ico"
+        width="25"
+        height="25"
+        alt="Angular logo" />
+      <strong [@bounceInDown] [routerLink]="'/'">Angular Table</strong>
     </div>
     <div [@stagger]>
       <span [@bounceInDown]> &copy; Klodian Shaba</span>
@@ -19,50 +26,6 @@
     </div>
   </header>
   <main>
-    <app-customize [table]="table"></app-customize>
-    <app-table [table]="table" [@zoomInUp]>
-      <ng-template tableTemplate="authorsTableTemplate" let-column let-row="row" let-index="index">
-        @switch (column.field) {
-          @case ('author') {
-            <a href="javascript:" (click)="editRow(row, index)">{{ row[column.field] }}</a>
-          }
-          @case ('nationality') {
-            <img class="padding-right" ngSrc="favicon.ico" width="25" height="25" alt="Angular logo" />
-            <span> {{ row[column.field] }}</span>
-          }
-          @case ('awardWinner') {
-            @if (row[column.field]) {
-              <mat-icon>done</mat-icon>
-            } @else {
-              <mat-icon>clear</mat-icon>
-            }
-          }
-        }
-      </ng-template>
-      <ng-template tableTemplate="booksTableTemplate" let-column let-row="row" let-index="index">
-        @switch (column.field) {
-          @case ('title') {
-            <span> {{ row[column.field] }}</span>
-          }
-        }
-      </ng-template>
-      <ng-template tableTemplate="booksCustomTemplate" let-row let-index="index">
-        <div class="books-custom-template">
-          @for (book of row.books; track book) {
-            <div matRipple class="book-custom-template">
-              <strong> {{ book.title }}</strong>
-            </div>
-          } @empty {
-            {{ row.author }} doesn't have books yet!
-          }
-        </div>
-      </ng-template>
-      <ng-template tableTemplate="authorsPreviewTemplate" let-row let-index="index">
-        {{ row.author }}
-      </ng-template>
-      <ng-template tableTemplate="booksPreviewTemplate" let-row let-index="index">
-        {{ row.title }}
-      </ng-template>
-    </app-table>
+    <router-outlet />
   </main>
 </div>
