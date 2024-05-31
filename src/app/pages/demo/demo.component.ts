@@ -168,7 +168,9 @@ export class DemoComponent {
 
   loadData() {
     this.table.dataSource = DataSource;
-    this.table.expandRow(this.table.dataSource[0]);
+    setTimeout(() => {
+      this.table.expandRow(this.table.dataSource[0]);
+    }, 1100);
   }
   editRow(row: AuthorModel, index: number): void {
     const data: AddRowDataModel = {
