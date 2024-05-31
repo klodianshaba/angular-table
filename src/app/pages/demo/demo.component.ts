@@ -94,7 +94,7 @@ export class DemoComponent {
     },
     pagination: {
       totalCount: DataSource.length,
-      size: 12,
+      size: 15,
     },
     expandable: {
       allow: true,
