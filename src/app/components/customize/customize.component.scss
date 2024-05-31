@@ -15,4 +15,11 @@
   .section-options.gap-0 {
     gap: 0;
   }
+  .section-styling-options {
+    display: grid;
+    grid-template-columns: auto auto;
+    label {
+      margin-left: 10px;
+    }
+  }
 }

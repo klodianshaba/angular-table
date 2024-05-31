@@ -1,6 +1,18 @@
 <main>
-  <app-customize [table]="table"></app-customize>
-  <app-table [table]="table" [@zoomInUp]>
+  <app-customize #customize [table]="table"></app-customize>
+  <app-table
+    [table]="table"
+    [@zoomInUp]
+    [style.--table-bg-color]="customize.bgColor"
+    [style.--table-row-bg-color]="customize.rowBgColor"
+    [style.--table-expand-row-bg-color]="customize.expandRowBgColor"
+    [style.--table-header-row-bg-color]="customize.headerRowBgColor"
+    [style.--table-footer-row-bg-color]="customize.footerRowBgColor"
+    [style.--table-hover-row-bg-color]="customize.hoverRowBgColor"
+    [style.--table-selected-row-bg-color]="customize.selectedRowBgColor"
+    [style.--table-box-shadow]="'0 0 3px 1px ' + customize.boxShadow"
+    [style.--table-border-color]="customize.borderColor"
+    [style.--table-text-color]="customize.textColor">
     <ng-template tableTemplate="authorsTableTemplate" let-column let-row="row" let-index="index">
       @switch (column.field) {
         @case ('author') {

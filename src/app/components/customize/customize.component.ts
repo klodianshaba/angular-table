@@ -46,6 +46,16 @@ import { bounceIn, staggerNestedAnimations } from 'ngxa';
 export class CustomizeComponent {
   table = input.required<Table<AuthorModel>>();
   status: boolean = true;
+  bgColor = '#ffffff';
+  rowBgColor = '#ffffff';
+  expandRowBgColor = '#ffffff';
+  headerRowBgColor = '#ffffff';
+  footerRowBgColor = '#ffffff';
+  hoverRowBgColor = '#ebebfc';
+  selectedRowBgColor = '#f6f6fd';
+  boxShadow = '#ffffff';
+  borderColor = '#eeeaea';
+  textColor = '#000000';
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar
