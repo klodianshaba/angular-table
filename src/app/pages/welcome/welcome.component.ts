@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { MatAnchor, MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { MatRipple } from '@angular/material/core';
@@ -8,7 +8,7 @@ import { bounceIn, staggerNestedAnimations, swing, zoomIn } from 'ngxa';
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [MatButton, RouterLink, NgOptimizedImage, MatRipple],
+  imports: [MatButton, RouterLink, NgOptimizedImage, MatRipple, MatAnchor],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.scss',
   animations: [
