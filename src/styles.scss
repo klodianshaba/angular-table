@@ -21,6 +21,9 @@ $theme: mat.define-theme(
 );
 html {
   @include mat.all-component-themes($theme);
+  --mdc-switch-track-height: 24px;
+  --mdc-switch-track-width: 46px;
+  --mat-switch-with-icon-handle-size: 18px;
 }
 
 html,
