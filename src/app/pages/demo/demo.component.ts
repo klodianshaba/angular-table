@@ -168,6 +168,7 @@ export class DemoComponent {
 
   loadData() {
     this.table.dataSource = DataSource;
+    this.table.selectRow(this.table.dataSource[0]);
     setTimeout(() => {
       this.table.expandRow(this.table.dataSource[0]);
     }, 1100);
