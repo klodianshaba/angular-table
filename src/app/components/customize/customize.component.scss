@@ -16,10 +16,13 @@
     gap: 0;
   }
   .section-styling-options {
-    display: grid;
-    grid-template-columns: auto auto;
     label {
-      margin-left: 10px;
+      margin-left: $padding;
+      cursor: pointer;
+    }
+    input {
+      margin-bottom: $padding;
+      cursor: pointer;
     }
   }
 }
