@@ -46,7 +46,7 @@ import { bounceIn, staggerNestedAnimations } from 'ngxa';
 export class CustomizeComponent {
   table = input.required<Table<AuthorModel>>();
   status: boolean = true;
-  bgColor = '#ffffff';
+  bgColor = '#f0cce6';
   rowBgColor = '#ffffff';
   expandRowBgColor = '#ffffff';
   headerRowBgColor = '#ffffff';
