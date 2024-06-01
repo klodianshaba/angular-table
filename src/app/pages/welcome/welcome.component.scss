@@ -1,9 +1,12 @@
+@import '../../../variables';
 .welcome {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
+  padding: $page-padding;
+  overflow: auto;
   .title {
     font-size: 30px;
     padding-bottom: 10px;
@@ -14,12 +17,8 @@
   .actions button:first-child {
     margin-right: 10px;
   }
-  .offers {
-    //overflow-x: hidden;
-  }
   ul {
     padding-left: 20px;
-    //list-style: none;
     li {
       position: relative;
       padding: 5px;
@@ -34,9 +33,15 @@
     li:hover {
       background-color: #3f51b5;
       a {
-        //font-weight: bold;
         color: white;
       }
     }
+  }
+}
+@media screen and (max-width: 700px) {
+  .welcome {
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
   }
 }
