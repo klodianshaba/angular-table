@@ -51,8 +51,12 @@ main {
   }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (max-width: 1000px) {
   main {
     flex-wrap: wrap;
+    app-customize {
+      position: relative;
+      max-width: 100%;
+    }
   }
 }
