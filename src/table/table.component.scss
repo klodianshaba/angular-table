@@ -149,14 +149,14 @@ button.menu-action-button {
   box-shadow: var(--table-box-shadow);
 }
 .cdk-drag-preview.cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 400ms cubic-bezier(0, 0, 0.2, 1);
 }
 table.cdk-drop-list-dragging {
   pointer-events: none !important;
   .table-row:not(.cdk-drag-placeholder) {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    transition: transform 400ms cubic-bezier(0, 0, 0.2, 1);
   }
 }
 .table-row.cdk-drag-placeholder {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 400ms cubic-bezier(0, 0, 0.2, 1);
 }
