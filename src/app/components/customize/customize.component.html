@@ -1,6 +1,6 @@
-<div [@stagger]>
+<div class="customize" [@stagger]>
   <div class="section" [@bounceInLeft]>
-    <div class="section-title padding-0">
+    <div class="section-title padding-top-0 padding-half-bottom">
       <strong>Columns</strong>
     </div>
     <div class="section-options">
@@ -15,7 +15,7 @@
   </div>
 
   <div class="section" [@bounceInLeft]>
-    <div class="section-title">
+    <div class="section-title padding-half-bottom padding-half-top">
       <strong>Actions</strong>
     </div>
     <div class="section-options">
@@ -36,10 +36,10 @@
   </div>
 
   <div class="section" [@bounceInLeft]>
-    <div class="section-title">
+    <div class="section-title padding-half-top">
       <strong>Pagination</strong>
     </div>
-    <div class="section-options">
+    <div class="section-options align-items-start">
       <mat-slide-toggle color="primary" [(ngModel)]="table().pagination.allow" (ngModelChange)="table().refresh()">
         Allow pagination
       </mat-slide-toggle>
@@ -84,7 +84,7 @@
   </div>
 
   <div class="section" [@bounceInLeft]>
-    <div class="section-title padding-bottom-0">
+    <div class="section-title padding-half-bottom">
       <strong>Expandable Types</strong>
     </div>
     <div class="section-options">
@@ -100,7 +100,7 @@
   </div>
 
   <div class="section" [@bounceInLeft]>
-    <div class="section-title padding-top-0">
+    <div class="section-title padding-half-top">
       <strong>Sorting</strong>
     </div>
     <div class="section-options">
