@@ -67,3 +67,9 @@ body.dragging {
 .margin-right {
   margin-right: $padding !important;
 }
+.padding-half-bottom {
+  padding-bottom: $padding / 2 !important;
+}
+.padding-half-top {
+  padding-top: $padding / 2 !important;
+}
