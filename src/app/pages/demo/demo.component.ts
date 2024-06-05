@@ -41,7 +41,10 @@ import { MatButton } from '@angular/material/button';
   ],
   templateUrl: './demo.component.html',
   styleUrl: './demo.component.scss',
-  animations: [zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Up' })],
+  animations: [
+    zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Up' }),
+    zoomIn({ stateChangeExpressions: ':enter', timings: '1s', direction: 'Down' }),
+  ],
 })
 export class DemoComponent {
   booksTable = new Table({
@@ -171,7 +174,7 @@ export class DemoComponent {
     this.table.selectRow(this.table.dataSource[0]);
     setTimeout(() => {
       this.table.expandRow(this.table.dataSource[0]);
-    }, 1100);
+    }, 1200);
   }
   editRow(row: AuthorModel, index: number): void {
     const data: AddRowDataModel = {
